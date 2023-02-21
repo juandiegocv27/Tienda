@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmls:th="https//www.thymeleaf.org">
+    <head>
+        <title>TechShop</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <!--        <div>Saludos</div>
+                <p th:text="${MensajeSaludos}"></p>-->
+        <!--      <h1>Un Cliente</h1>
+              <p>Nombre: <pan th:text="${cliente.nombre}"></pan></p>
+              <p>Apellidos: <pan th:text="${cliente.apellidos}"></pan></p>
+              <p>Correo: <pan th:text="${cliente.correo}"></pan></p>
+              <p>Telefono: <pan th:text="${cliente.telefono}"></pan></p>
+        -->
+        <h1>Clientes</h1>
+        <table border="1">
+            <thead>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Telefono</th>
+        </thead>
+        <tbody>
+            <tr th:each="cliente :${clientes}">  
+                <td th:text="${cliente.nombre}"></td>
+                <td th:text="${cliente.apellidos}"></td>
+                <td th:text="${cliente.correo}"></td>
+                <td th:text="${cliente.telefono}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
