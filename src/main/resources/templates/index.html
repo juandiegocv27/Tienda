@@ -17,22 +17,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
               <p>Correo: <pan th:text="${cliente.correo}"></pan></p>
               <p>Telefono: <pan th:text="${cliente.telefono}"></pan></p>
         -->
+
         <h1>Clientes</h1>
-        <table border="1">
-            <thead>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Correo</th>
-            <th>Telefono</th>
-        </thead>
-        <tbody>
-            <tr th:each="cliente :${clientes}">  
-                <td th:text="${cliente.nombre}"></td>
-                <td th:text="${cliente.apellidos}"></td>
-                <td th:text="${cliente.correo}"></td>
-                <td th:text="${cliente.telefono}"></td>
-            </tr>
-        </tbody>
-    </table>
-</body>
+        <a th:href="@{/nuevoCliente}">Nuevo Cliente</a>
+        <br/>
+        <div th:if="${clientes != null and !clientes.empty}">
+            <table border="1">
+                <thead>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+                </thead>
+                <tbody>
+                    <tr th:each="cliente :${clientes}">  
+                        <td th:text="${cliente.nombre}"></td>
+                        <td th:text="${cliente.apellidos}"></td>
+                        <td th:text="${cliente.correo}"></td>
+                        <td th:text="${cliente.telefono}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${clientes == null or clientes.empty}">
+            La lista de clientes estpa vacía.
+        </div>
+    </body>
 </html>
