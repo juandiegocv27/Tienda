@@ -7,14 +7,12 @@ import java.util.List;
 
 public interface ClienteService {
     
-    public List<Cliente> getCliente();
-    
-    public Cliente getCliente(Cliente cliente);
-    
-    public void save (Cliente cliente); //tanto para insertar como modificar un registro
-            
-    public void delete (Cliente cliente);
+   public List<Cliente> getCliente(); 
+   
+   public Cliente getCliente(Cliente cliente);
+   
+   public void save(Cliente cliente); //para insertar para modificar un registro
+   
+   public void delete(Cliente cliente);
     
 }
-    
-

@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.Tienda.controller;
 
 
@@ -16,27 +20,42 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class IndexController {
 
     @Autowired
-    ClienteService ClienteService;
-    
-    @GetMapping("/")
-    public String Inicio(Model model) {
-        log.info("Ahora utilizando MCV");
+    ClienteService clienteService;
 
-        var clientes = ClienteService.getCliente();
+    @GetMapping("/")
+    public String inicio(Model model) {
+        log.info("Ahora utilizando MVC");
+
+        var clientes = clienteService.getCliente();
         model.addAttribute("clientes", clientes);
 
         return "index";
+
     }
 
     @GetMapping("/nuevoCliente")
-    public String nuevoCliente(Cliente cliente) {
+    public String nuevoCliente(Cliente Cliente){
         return "modificarCliente";
     }
     
     @PostMapping("/guardarCliente")
     public String guardarCliente(Cliente cliente)  {
-        ClienteService.save(cliente);
-        return"index";
+        clienteService.save(cliente);
+        return "redirect:/";
     }
     
+    @GetMapping("/modificarCliente/{idCliente}")
+    public String modificarCliente(Cliente cliente, Model model){
+        cliente = clienteService.getCliente(cliente);
+        model.addAttribute("Cliente", cliente);
+        return "modificarCliente";
+        
+    }
+    
+    @GetMapping("/eliminarCliente/{idCliente}")
+    public String eliminarCliente(Cliente cliente){
+        clienteService.delete(cliente);
+        return"redirect:/";
+        
+    }
 }

@@ -1,24 +1,14 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html xmls:th="https//www.thymeleaf.org">
+
+<html xmlns:th="https://thymeleaf.org">
     <head>
         <title>TechShop</title>
         <meta charset="UTF-8">
     </head>
     <body>
-        <!--        <div>Saludos</div>
-                <p th:text="${MensajeSaludos}"></p>-->
-        <!--      <h1>Un Cliente</h1>
-              <p>Nombre: <pan th:text="${cliente.nombre}"></pan></p>
-              <p>Apellidos: <pan th:text="${cliente.apellidos}"></pan></p>
-              <p>Correo: <pan th:text="${cliente.correo}"></pan></p>
-              <p>Telefono: <pan th:text="${cliente.telefono}"></pan></p>
-        -->
-
-        <h1>Clientes</h1>
+        
+        <header th:replace="layout/plantilla :: header"></header>
+        <h2>Un cliente</h2>
         <a th:href="@{/nuevoCliente}">Nuevo Cliente</a>
         <br/>
         <div th:if="${clientes != null and !clientes.empty}">
@@ -28,19 +18,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <th>Apellidos</th>
                 <th>Correo</th>
                 <th>Telefono</th>
+                <th colspan="2">Acciones</th>
                 </thead>
                 <tbody>
-                    <tr th:each="cliente :${clientes}">  
+                    <tr  th:each="cliente : ${clientes}">
                         <td th:text="${cliente.nombre}"></td>
                         <td th:text="${cliente.apellidos}"></td>
                         <td th:text="${cliente.correo}"></td>
                         <td th:text="${cliente.telefono}"></td>
+                        <td><a th:href="@{/modificarCliente/} + ${cliente.idCliente}">Modificar</a></td>
+                        <td><a th:href="@{/eliminarCliente/} + ${cliente.idCliente}">Eliminar</a></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div th:if="${clientes == null or clientes.empty}">
-            La lista de clientes estpa vacía.
+                La lista de clientes está vacia :(
         </div>
+        <footer th:replace="layout/plantilla ::footer" />
     </body>
 </html>
