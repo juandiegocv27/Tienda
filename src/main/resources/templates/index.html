@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns:th="https://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns=:"http://www.w3.org/1999/xhtml">
     <head>
         <title>TechShop</title>
         <meta charset="UTF-8">
+        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        
-        <header th:replace="layout/plantilla :: header"></header>
-        <h2>Un cliente</h2>
+        <header th:replace="layout/plantilla :: header"/>  
+        </header>
+        <h2>Nuestros Articulos</h2>
         <a th:href="@{/nuevoCliente}">Nuevo Cliente</a>
         <br/>
         <div th:if="${clientes != null and !clientes.empty}">
@@ -21,7 +24,7 @@
                 <th colspan="2">Acciones</th>
                 </thead>
                 <tbody>
-                    <tr  th:each="cliente : ${clientes}">
+                    <tr th:each="cliente : ${clientes}">
                         <td th:text="${cliente.nombre}"></td>
                         <td th:text="${cliente.apellidos}"></td>
                         <td th:text="${cliente.correo}"></td>
@@ -33,8 +36,30 @@
             </table>
         </div>
         <div th:if="${clientes == null or clientes.empty}">
-                La lista de clientes está vacia :(
+            La lista de clientes está vacía...
+        <div class="contenido">
+            <h2>Nuestros Articulos</h2>
+            <div th:if="${articulos != null and !articulos.empty}">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Drescripcion</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="articulo : ${articulos}">
+                            <td th:text="${articulo.descripcion}"></td>
+                            <td th:text="${#numbers.formtDecimal(articulo.precio,3,2)}" style="text-align: right"></td>
+                            <td><a th:href="@{/carrito/agregar/} + ${articulo.idArticulo}">Agregar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${articulos == null or articulos.empty}">
+                No tenemos articulos que mostrar...
+            </div>
         </div>
-        <footer th:replace="layout/plantilla ::footer" />
+        <footer th:replace="layout/plantilla :: footer"/>
     </body>
 </html>
