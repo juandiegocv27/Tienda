@@ -1,5 +1,6 @@
 package com.Tienda.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Cliente  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente")
     private Long idCliente; //transforma en id_cliente
     String nombre;
     String apellidos;

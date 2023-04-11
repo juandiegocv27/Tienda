@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">   
     <head>    
         <title>TechShop</title>  
@@ -10,6 +11,10 @@
         <div class="contenido">    
             <h2>Listado de clientes</h2>     
             <a th:href="@{/cliente/nuevo}">Nuevo Cliente</a>    
+            <h2 th:text="#{cliente.titulo}">Listado de clientes</h2>     
+            <br/>
+            <br/>
+            <a th:href="@{/cliente/nuevo}" th:text="#{cliente.nuevo}">Nuevo Cliente</a>    
             <br/>         
             <div th:if="${clientes != null and !clientes.empty}">      
                 <table border="1">     
@@ -19,6 +24,14 @@
                     <th>Teléfono</th>         
                     <th>Límite</th>             
                     <th colspan="2">Acciones</th>  
+                    <thead>   
+                    <th th:text="#{cliente.nombre}">Nombre</th>        
+                    <th th:text="#{cliente.apellidos}">Apellidos</th>        
+                    <th th:text="#{cliente.correo}">Correo</th>            
+                    <th th:text="#{cliente.telefono}">Teléfono</th>         
+                    <th th:text="#{cliente.limite}">Límite</th>             
+                    <th th:text="#{accion.actualizar}">Actualizar</th>  
+                    <th th:text="#{accion.eliminar}">Eliminar</th>  
                     </thead>                
                     <tbody>                 
                         <tr th:each="cliente : ${clientes}">   
@@ -29,12 +42,17 @@
                             <td th:text="${#numbers.formatDecimal(cliente.credito.limite, 3, 2)}"></td>   
                             <td><a th:href="@{/cliente/modificar/} + ${cliente.idCliente}">Modificar</a></td>     
                             <td><a th:href="@{/cliente/eliminar/} + ${cliente.idCliente}">Eliminar</a></td>     
+                            <td><a th:href="@{/cliente/modificar/} + ${cliente.idCliente}" 
+                                   th:text="#{accion.actualizar}">Modificar</a></td>     
+                            <td><a th:href="@{/cliente/eliminar/} + ${cliente.idCliente}" 
+                                   th:text="#{accion.eliminar}">Eliminar</a></td>     
                         </tr>             
                     </tbody>          
                 </table>        
             </div>          
             <div th:if="${clientes == null or clientes.empty}">    
                 La lista de clientes está vacía...
+               <p th:text="#{cliente.no_mostrar}">No hay clientes</p>
             </div>    
         </div>     
         <footer th:replace="layout/plantilla :: footer" /> 
