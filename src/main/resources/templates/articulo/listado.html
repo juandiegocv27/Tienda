@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-
-<html>
+<<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns=:"http://www.w3.org/1999/xhtml">
     <head>
-        <title>TODO supply a title</title>
         <title>TechShop</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div>TODO write content</div>
         <header th:replace="layout/plantilla :: header"/>  
         <div class="contenido">
             <h2>Listado de Clientes</h2>
             <a th:href="@{/articulo/nuevo}">Nuevo Articulo</a>
+            <h2 th:text="#{articulo.titulo}">Listado de Clientes</h2>
+            <br/>
+            <br/>
+            <a th:href="@{/articulo/nuevo}" th:text="#{articulo.nuevo}">Nuevo Articulo</a>
             <div th:if="${articulos != null and !articulos.empty}">
                 <table border="1">
                     <thead>
@@ -28,6 +23,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <th>Precio</th>
                             <th>Existencias</th>
                             <th>Activa</th>
+                            <th th:text="#{articulo.descripcion}">Drescripcion</th>
+                            <th th:text="#{articulo.precio}">Precio</th>
+                            <th th:text="#{articulo.existencias}">Existencias</th>
+                            <th th:text="#{articulo.activo}">Activa</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,12 +37,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <td><input type="checkbox" name="activo" th:checked="${articulo.activo}" disabled="true"></td>
                             <td><a th:href="@{/articulo/eliminar/} + ${articulo.idArticulo}">Eliminar</a></td>
                             <td><a th:href="@{/articulo/modificar/} + ${articulo.idArticulo}">Modificar</a></td>
+                            <td><a th:href="@{/articulo/eliminar/} + ${articulo.idArticulo}"
+                                   th:text="#{accion.eliminar}">Eliminar</a></td>
+                            <td><a th:href="@{/articulo/modificar/} + ${articulo.idArticulo}"
+                                   th:text="#{accion.actualizar}">Modificar</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div th:if="${articulos == null or articulos.empty}">
                 No tenemos articulos mostrar...
+                <p th:text="#{articulo.no_mostrar}">No hay articulos</p>
             </div>
         </div>
         <footer th:replace="layout/plantilla :: footer"/>

@@ -1,46 +1,46 @@
 <!DOCTYPE html>
-
-<html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns=:"http://www.w3.org/1999/xhtml">
     <head>
-        <title>TODO supply a title</title>
         <title>TechShop</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div>TODO write content</div>
         <header th:replace="layout/plantilla :: header"/>  
         <div class="contenido">
-            <h2>Listado de Clientes</h2>
-            <a th:href="@{/articulo/nuevo}">Nuevo Articulo</a>
-            <div th:if="${articulos != null and !articulos.empty}">
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>Drescripcion</th>
-                            <th>Precio</th>
-                            <th>Existencias</th>
-                            <th>Activa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="articulo : ${articulos}">
-                            <td th:text="${articulo.descripcion}"></td>
-                            <td th:text="${#numbers.formtDecimal(articulo.precio,3,2)}" style="text-align: right"></td>
-                            <td th:text="${articulo.existencias}" style="text-align: center"></td>
-                            <td><input type="checkbox" name="activo" th:checked="${articulo.activo}" disabled="true"></td>
-                            <td><a th:href="@{/articulo/eliminar/} + ${articulo.idArticulo}">Eliminar</a></td>
-                            <td><a th:href="@{/articulo/modificar/} + ${articulo.idArticulo}">Modificar</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div th:if="${articulos == null or articulos.empty}">
-                No tenemos articulos mostrar...
-            </div>
+            <h2>Datos Cliente</h2>
+            <a th:href="@{/articulo/listado}">Regresar</a>
+            <h2 th:text="#{articulo.datos}">Datos Cliente</h2>
+            <br/>
+            <a th:href="@{/articulo/listado}" th:text="#{accion.regresar}">Regresar</a>
+            <br/><br/>
+            <form th:action="@{/articulo/guardar}" method="post" th:object="${articulo}">
+                <input type="hidden" name="idArticulo" th:field="*{idArticulo}"/><br/>
+                <label for="categoria">Categoria</label>
+                <select th:field="*{idCategoria}">
+                    <option th:each="categoria: ${categorias}"
+                            th:value="${categoria.idCategoria}"
+                            th:text="{categoria.descripcion}"/>
+                </select><br/>
+                <label for="descripcion">Descripcion:</label>
+                <label for="descripcion" th:text="#{articulo.descripcion}">Descripcion:</label>
+                <input type="text" name="descripcion" th:field="*{descripcion}"/><br/>
+                <label for="detalle">Detalle</label>
+                <label for="detalle" th:text="#{articulo.detalle}">Detalle</label>
+                <textarea name="detalle" th:field="*{detalle}" rows="6" cols="50"/><br/>
+                <label for="precio">Precio</label>
+                <label for="precio" th:text="#{articulo.precio}">Precio</label>
+                <input type="number" name="precio" th:field="*{precio}"/><br/>
+                <label for="existencias">Existencias</label>
+                <label for="existencias" th:text="#{articulo.existencias}">Existencias</label>
+                <input type="number" name="existencias" th:field="*{existencias}"/><br/>
+                <label for="activo">Activo</label>
+                <label for="activo" th:text="#{articulo.activo}">Activo</label>
+                <input type="checkbox" name="activo" th:field="*{activo}"/><br/>
+                <input type="submit" name="guardar" value="Guardar"/>
+                <input type="submit" name="guardar" th:value="#{accion.guardar}"/>
+            </form>
         </div>
         <footer th:replace="layout/plantilla :: footer"/>
     </body>
