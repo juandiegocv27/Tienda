@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns=:"http://www.w3.org/1999/xhtml">
-    <head>
+    <head th:replace="layout/plantilla :: head">
         <title>TechShop</title>
-        <meta charset="UTF-8">
-        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"/>  
+         </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>  
         <div class="contenido">
-            <h2>Listado de Clientes</h2>
-            <a th:href="@{/categoria/nuevo}">Nuevo Categoria</a>
             <h2 th:text="#{categoria.titulo}">Listado de Clientes</h2>
             <br/>
             <br/>
@@ -19,8 +18,6 @@
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>Drescripcion</th>
-                            <th>Activa</th>
                             <th th:text="#{categoria.descripcion}">Drescripcion</th>
                             <th th:text="#{categoria.activo}">Activa</th>
                         </tr>
@@ -29,8 +26,6 @@
                         <tr th:each="categoria : ${categorias}">
                             <td th:text="${categoria.descripcion}"></td>
                             <td><input type="checkbox" name="activo" th:checked="${categoria.activo}" disabled="true"></td>
-                            <td><a th:href="@{/categoria/eliminar/} + ${categoria.idCategoria}">Eliminar</a></td>
-                            <td><a th:href="@{/categoria/modificar/} + ${categoria.idCategoria}">Modificar</a></td>
                             <td><a th:href="@{/categoria/eliminar/} + ${categoria.idCategoria}"
                                    th:text="#{accion.eliminar}">Eliminar</a></td>
                             <td><a th:href="@{/categoria/modificar/} + ${categoria.idCategoria}"                                
@@ -40,7 +35,6 @@
                 </table>
             </div>
             <div th:if="${categorias == null or categorias.empty}">
-                No tenemos categorias mostrar...
                 <p th:text="#{categoria.no_mostrar}">No hay categorias</p>
             </div>
         </div>
